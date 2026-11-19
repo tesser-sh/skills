@@ -1,0 +1,33 @@
+name: sync
+
+on:
+  schedule:
+    - cron: "23 9 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+
+      - name: Write the skill from the latest tesser release
+        run: |
+          set -eu
+          curl -fsSL https://tesser.sh/install | sh
+          tesser="$HOME/.tesser/bin/tesser"
+          "$tesser" skill install --dir skills
+          git add skills
+          git diff --cached --quiet && exit 0
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m "tesser-cli from $("$tesser" version)"
+          git push
