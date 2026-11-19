@@ -18,8 +18,6 @@ Hit a sharp edge (a misleading error, a missing command, a workaround)? Run
 `tesser feedback "<what you ran, what happened, what you expected>"`, then
 keep going.
 
-No `tesser` command? Install it first: https://tesser.sh/docs/install.md
-
 Not logged in? Run `tesser login` yourself. It prints a link and exits: send
 it to the user, and once they say they have authorized it, run
 `tesser login --wait`, then tell them the account and org it logged in as.
