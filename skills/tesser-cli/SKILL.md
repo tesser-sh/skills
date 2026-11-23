@@ -7,12 +7,18 @@ First look for the repo's own skill: a SKILL.md and *.toml manifests in any of
 .agents/skills/tesser, .claude/skills/tesser, .agents/skills/devboxes,
 .claude/skills/devboxes at the repo root. Check all four; what you find there wins.
 
-tesser explains itself. Before your first command:
+With a repo skill, these are most of what you need. Without one, read
+`tesser --help` once: it has the rules.
 
-    tesser --help          how it works, and the rules
-    tesser <cmd> --help    what that command actually does
+    tesser exec -- pnpm test     tests, typechecks, builds on the workbench
+    BOX=$(tesser dev web)        a dev server; give the human the URL it prints
+    tesser wait <box|job_id>     after dev or exec --detach; never nohup, tmux or &
+    tesser sync "$BOX"           ship edits; --restart for a new dependency
+    tesser browser "$BOX" s.mjs  screenshots, page checks: puppeteer next to the box's Chrome
 
 Errors name the next command to run. Trust them over anything you remember.
+Stuck on a command: `tesser <cmd> --help`. `use`, `keep` and `cloud` are the
+human's.
 
 Hit a sharp edge (a misleading error, a missing command, a workaround)? Run
 `tesser feedback "<what you ran, what happened, what you expected>"`, then
