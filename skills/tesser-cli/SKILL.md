@@ -14,7 +14,7 @@ With a repo skill, these are most of what you need. Without one, read
     BOX=$(tesser dev web)        a dev server; give the human the URL it prints
     tesser wait <box|job_id>     after dev or exec --detach; never nohup, tmux or &
     tesser sync "$BOX"           ship edits; --restart for a new dependency
-    tesser browser "$BOX" s.mjs  screenshots, page checks: puppeteer next to the box's Chrome
+    tesser browser "$BOX" <<'JS' screenshots, page checks: JS on stdin next to the box's Chrome
 
 Errors name the next command to run. Trust them over anything you remember.
 Stuck on a command: `tesser <cmd> --help`. `use`, `keep` and `cloud` are the
